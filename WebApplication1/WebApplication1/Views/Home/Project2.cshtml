@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Project2";
+}
+
+<head>
+    <h2>@ViewBag.Message</h2>
+    <script src="~/Scripts/knockout-3.4.1.js"></script>
+</head>
+<body>
+    <p>Enter your birth Date: <input type="date" data-bind="value: rawDate">  </p>
+    <p> <span data-bind="text: yourAge"></span></p>
+
+    <script>
+   function MyViewModel(){
+      this.yourAge = ko.observable();
+      today = new Date();
+      rawDate = ko.observable();
+
+      this.rawDate = ko.pureComputed({
+         read: function(){
+            return this.yourAge;
+         },
+         write: function(value){
+            var b = Date.parse(value);   
+            var t = Date.parse(today);   
+            diff = t - b;                 
+            var y = Math.floor(diff/31449600000);         
+            var m = Math.floor((diff % 31449600000)/604800000/4.3);
+	        this.yourAge("You are " + y + " year(s) " + m +" months old.");
+         },
+         owner: this
+      });
+   }
+   ko.applyBindings(new MyViewModel());
+
+    </script>
+</body>

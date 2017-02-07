@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Application 1";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> @ViewBag.Title.</title>
+    <h2>@ViewBag.Message</h2>
+    <script src="~/Scripts/knockout-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div>
+        <p>First Name: <input data-bind="value: firstName"</p>
+        <p>Last Name: <input data-bind="value: lastName"</p>
+        
+        <!-- Debugging text
+        <p><strong data-bind="text: firstName"></strong></p>
+        <p><strong data-bind="text:lastName"></strong></p> 
+        -->
+
+        <p>Hello, <strong data-bind="text: fullName"></strong>! Welcome to my website</p>
+    </div>
+
+    <script>
+        function AppViewModel() {
+            var self = this;
+            self.firstName = ko.observable(" ");
+            self.lastName = ko.observable(" ");
+
+            this.fullName = ko.computed(function () {
+                return this.firstName() == " " && this.lastName() == " " ? "stranger" : self.firstName() + " " + self.lastName();
+            }, self);
+        }
+
+        ko.applyBindings(new AppViewModel());
+    </script>
+</body>
+</html>
