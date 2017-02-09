@@ -272,6 +272,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Project1.cshtml" />
     <Content Include="Views\Home\Project2.cshtml" />
+    <Content Include="Views\Home\Project3.cshtml" />
+    <Content Include="Views\Home\Project4.cshtml" />
+    <Content Include="Views\Home\Project5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

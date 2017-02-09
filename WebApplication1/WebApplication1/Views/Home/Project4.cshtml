@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Project4";
+}
+<head>
+    <h2>@ViewBag.Message</h2>
+    <style type='text/css'>
+        #results {
+            width: 100%;
+            border: 1px solid gray;
+            padding: 5px;
+            height: 500px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <script type='text/javascript'>
+        // Parses returned response and extracts
+        // the title, links, and text of each news story.
+        function top_stories(o) {
+            var items = o.query.results.item;
+            var output = '';
+            var no_items = items.length;
+            for (var i = 0; i < no_items; i++) {
+                var title = items[i].title;
+                var link = items[i].link;
+                var desc = items[i].description;
+                output += "<h3><a href='" + link + "'>" + title + "</a></h3>" + desc + "<hr/>";
+            }
+            // Place news stories in div tag
+            document.getElementById('results').innerHTML = output;
+        }
+    </script>
+    <div id="results"></div>
+    <script src="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22http%3A%2F%2Frss.news.yahoo.com%2Frss%2Ftopstories%22&format=json&callback=top_stories"></script>
+
+    <!--
+    <script>
+        function YQLQuery(query, callback)
+        {
+            var self = this;
+            self.query = query;
+            self.callback = callback;
+            self.fetch = function () {
+                if (!thisquery || !this.callback) {
+                    throw new Error('YQLQuery.fetch(): Parameters may be undefined');
+                }
+
+                var scriptEL = document.createElement('script'),
+                    uid = 'yql' + +new Date(),
+                    encodedQuery = encodeURIComponent(this.query.toLowerCase()),
+                    instance = self;
+
+                YQLQuery[uid] = function (json) {
+                    instance.callback(json);
+                    delete YQLQuery[uid];
+                    document.body.removeChild(scriptEL);
+                };
+
+                scriptEL.src = 'http://query.yahooapis.com/v1/public/yql?q='
+                    + encodedQuery + '&format=json&callback=YQLQuery.' + uid;
+            };
+        }
+    </script>
+    -->
+</body>
